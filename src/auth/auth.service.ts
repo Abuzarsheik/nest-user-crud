@@ -47,7 +47,7 @@ export class AuthService {
 
     // if user does not exist throw exception
 
-    if (!user) throw new ForbiddenException('Credentials incorrect');
+    if (!user) throw new ForbiddenException('Credentials Incorrect');
 
     //compare password
     const passwordMatch = await argon.verify(user.hash, dto.password);
@@ -56,6 +56,8 @@ export class AuthService {
 
     //send back the user
 
-    return user;
+    const { hash, ...result } = user;
+
+    return result;
   }
 }
